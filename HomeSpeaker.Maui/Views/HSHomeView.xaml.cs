@@ -4,9 +4,9 @@ namespace HomeSpeaker.Maui.Views;
 
 public partial class HSHomeView : ContentPage
 {
-	public HSHomeView()
+	public HSHomeView(HSHomeViewModel vm)
 	{
 		InitializeComponent();
-        BindingContext = new HSHomeViewModel();
+        BindingContext = vm;
     }
 }

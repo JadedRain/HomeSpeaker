@@ -5,8 +5,11 @@
              Title="HSHomeView">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            Text="{Binding Volume}"/>
+        <Button
+                Text="Volume"
+                Command="{Binding GetVolumeCommand}">
+            </Button>
+
     </VerticalStackLayout>
 </ContentPage>

@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Maui;
+using HomeSpeaker.Maui.ViewModels;
+using HomeSpeaker.Maui.Views;
 using Microsoft.Extensions.Logging;
 
 namespace HomeSpeaker.Maui;
@@ -20,7 +22,9 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+		builder.Services.AddSingleton<HSHomeViewModel>();
+		builder.Services.AddSingleton<HSHomeView>();
 
-		return builder.Build();
+        return builder.Build();
 	}
 }

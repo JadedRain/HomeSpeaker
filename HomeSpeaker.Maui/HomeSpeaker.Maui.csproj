@@ -62,14 +62,25 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.67.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.2" />
+		<PackageReference Include="protobuf-net.Grpc" Version="1.2.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\HomeSpeaker.Server2\HomeSpeaker.Server2.csproj" />
+	  <ProjectReference Include="..\HomeSpeaker.Shared\HomeSpeaker.Shared.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\HSHomeView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Models\" />
 	</ItemGroup>
 
 </Project>
