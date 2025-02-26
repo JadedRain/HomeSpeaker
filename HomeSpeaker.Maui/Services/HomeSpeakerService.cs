@@ -1,27 +1,20 @@
-﻿
-
-using HomeSpeaker.Shared;
+﻿using HomeSpeaker.Shared;
+using Microsoft.Build.Framework;
+using Microsoft.Extensions.Logging;
 using static HomeSpeaker.Shared.HomeSpeaker;
 
 namespace HomeSpeaker.Maui.Services;
 
-class HomeSpeakerService1
+public class HomeSpeakerService : HomeSpeakerBase
 {
-    private HomeSpeakerClient client;
+	private readonly ILogger<HomeSpeakerService> _logger;
+	public HomeSpeakerService(ILogger<HomeSpeakerService> logger)
+	{
+		_logger = logger ?? throw new System.ArgumentNullException(nameof(logger)); ;
+	}
 
-    public async Task SetVolumeAsync(int volume0to100)
-    {
-        var request = new PlayerControlRequest { SetVolume = true, VolumeLevel = volume0to100 };
-        await client.PlayerControlAsync(request);
-    }
-
-    public async Task<int> GetVolumeAsync()
-    {
-        //var status = await GetStatusAsync();
-        return 5;
-    }
-    public async Task<GetStatusReply> GetStatusAsync()
-    {
-        return await client.GetPlayerStatusAsync(new GetStatusRequest());
-    }
+	public string SendTest()
+	{
+		return "Just a test";
+	}
 }

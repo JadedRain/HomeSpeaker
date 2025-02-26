@@ -1,27 +1,30 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Grpc.Net.Client;
-using ProtoBuf.Grpc.Client;
 using HomeSpeaker.Maui.Services;
 using System.Threading.Tasks;
 using static HomeSpeaker.Shared.HomeSpeaker;
 
 namespace HomeSpeaker.Maui.ViewModels;
 
-public partial class HSHomeViewModel: ObservableObject
+public partial class HSHomeViewModel : ObservableObject
 {
-    [ObservableProperty]
-    private int volume = 1;
+	private HomeSpeakerService _homeSpeakerService;
 
-    [RelayCommand]
-    public async Task GetVolume()
-    {
-        GrpcClientFactory.AllowUnencryptedHttp2 = true;
-        using var channel= GrpcChannel.ForAddress("http://localhost:5280");
-        var client = channel.CreateGrpcService<HomeSpeakerService1>();
-        var Response = await client.GetVolumeAsync();
-        Volume = Response;
+	[ObservableProperty]
+	private int volume = 1;
 
-    }
+	[ObservableProperty]
+	private string testString;
 
+	[RelayCommand]
+	public void SendTest()
+	{
+		TestString = _homeSpeakerService.SendTest();
+	}
+
+	public HSHomeViewModel(HomeSpeakerService homeSpeakerService)
+	{
+		_homeSpeakerService = homeSpeakerService;
+	}
 }
+
