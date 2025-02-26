@@ -17,9 +17,9 @@ public partial class HSHomeViewModel : ObservableObject
 	private string testString;
 
 	[RelayCommand]
-	public void SendTest()
+	public async void GetVolume()
 	{
-		TestString = _homeSpeakerService.SendTest();
+		Volume = await _homeSpeakerService.GetVolumeAsync();
 	}
 
 	public HSHomeViewModel(HomeSpeakerService homeSpeakerService)

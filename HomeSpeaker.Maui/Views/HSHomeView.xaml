@@ -5,10 +5,10 @@
              Title="HSHomeView">
     <VerticalStackLayout>
         <Label 
-            Text="{Binding TestString}"/>
+            Text="{Binding Volume}"/>
         <Button
                 Text="Volume"
-                Command="{Binding SendTestCommand}">
+                Command="{Binding GetVolumeCommand}">
             </Button>
 
     </VerticalStackLayout>
