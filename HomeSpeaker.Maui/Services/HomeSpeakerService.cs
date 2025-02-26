@@ -1,8 +1,11 @@
 ﻿using Grpc.Net.Client;
 using HomeSpeaker.Shared;
+using HomeSpeaker.Maui.Models;
 using Microsoft.Build.Framework;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 using static HomeSpeaker.Shared.HomeSpeaker;
+using Grpc.Core;
 
 namespace HomeSpeaker.Maui.Services;
 
@@ -10,6 +13,9 @@ public class HomeSpeakerService : HomeSpeakerBase
 {
 	private readonly ILogger<HomeSpeakerService> _logger;
 	private HomeSpeakerClient _client;
+	private List<SongMessage> songs = new();
+
+	public IEnumerable<SongMessage> Songs => songs;
 	public HomeSpeakerService(ILogger<HomeSpeakerService> logger)
 	{
 		_logger = logger;
@@ -31,4 +37,23 @@ public class HomeSpeakerService : HomeSpeakerBase
 	{
 		return await _client.GetPlayerStatusAsync(new GetStatusRequest());
 	}
+
+	public async Task SetVolumeAsync(int volume0to100)
+	{
+		var request = new PlayerControlRequest { SetVolume = true, VolumeLevel = volume0to100 };
+		await _client.PlayerControlAsync(request);
+	}
+
+	public async Task<IEnumerable<SongModel>> GetAllSongsAsync()
+	{
+			_logger.LogWarning("Trying to send otel trace!");
+			var songs = new List<SongModel>();
+			var getSongsReply = _client.GetSongs(new GetSongsRequest { });
+			await foreach (var reply in getSongsReply.ResponseStream.ReadAllAsync())
+			{
+				songs.AddRange(reply.Songs.Select(s => s.ToSongModel()));
+			}
+			return songs;
+	}
+
 }
