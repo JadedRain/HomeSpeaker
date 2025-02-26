@@ -39,7 +39,7 @@ public partial class HSHomeViewModel : ObservableObject
 	[RelayCommand]
 	public async void PlayFirstSong()
 	{
-
+		await _homeSpeakerService.PlaySongAsync(1);
 	}
 
 	public HSHomeViewModel(HomeSpeakerService homeSpeakerService)

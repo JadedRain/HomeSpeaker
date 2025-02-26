@@ -12,9 +12,9 @@ public class WindowsMusicPlayer : IMusicPlayer
     {
         this.logger = logger;
         this.library = library;
-    }
-
-    const string vlc = @"c:\program files\videolan\vlc\vlc.exe";
+	}
+    
+    const string vlc = @"C:\Program Files\VideoLAN\VLC\vlc.exe";
     private readonly ILogger<WindowsMusicPlayer> logger;
     private readonly Mp3Library library;
     private Process? playerProcess;

@@ -56,4 +56,10 @@ public class HomeSpeakerService : HomeSpeakerBase
 			return songs;
 	}
 
+	public async Task PlaySongAsync(int songId)
+	{
+		await _client.PlayerControlAsync(new PlayerControlRequest { Stop = true, ClearQueue = true });
+		await _client.EnqueueSongAsync(new PlaySongRequest { SongId = songId });
+	}
+
 }
