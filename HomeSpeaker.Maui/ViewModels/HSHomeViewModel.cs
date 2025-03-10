@@ -32,6 +32,13 @@ public partial class HSHomeViewModel : ObservableObject
             await _homeSpeakerService.SetVolumeAsync(newVolume);
     }
 
+    [RelayCommand]
+    public async Task SetVolume(int newVolume)
+    {
+        Volume = newVolume;
+        await _homeSpeakerService.SetVolumeAsync(newVolume);
+    }
+
 
     [RelayCommand]
 	public async void GetSongs()

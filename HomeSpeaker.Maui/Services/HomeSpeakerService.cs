@@ -81,10 +81,9 @@ public class HomeSpeakerService : HomeSpeakerBase
     {
         var groups = new Dictionary<string, List<SongModel>>();
         var getSongsReply = _client.GetSongs(new GetSongsRequest { });
-        //var starredSongs = (await database.GetStarredSongsAsync()).Select(s => s.Path).ToList();
         await foreach (var reply in getSongsReply.ResponseStream.ReadAllAsync())
         {
-            foreach (var s in reply.Songs/*.Where(s => starredSongs.Contains(s.Path) == false)*/)
+            foreach (var s in reply.Songs)
             {
                 var song = s.ToSongModel();
                 if (song.Folder == null)

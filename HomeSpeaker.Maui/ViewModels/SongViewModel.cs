@@ -32,9 +32,7 @@ public partial class SongViewModel : ObservableObject
     [RelayCommand]
     public async Task PlaySong(SongModel song)
     {
-        if (song == null) return; // Ensure the song exists
-
-        // Call the service to play the song using its SongId
+        if (song == null) return; 
         await _homeSpeakerService.PlaySongAsync(song.SongId);
     }
 
