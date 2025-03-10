@@ -14,6 +14,9 @@ public partial class SongViewModel : ObservableObject
     [ObservableProperty]
     private ObservableCollection<SongModel> songs = new();
 
+    [ObservableProperty]
+    private SongModel selectedSong;
+
     [RelayCommand]
     public async void GetSongs()
     {
@@ -24,5 +27,19 @@ public partial class SongViewModel : ObservableObject
             Songs.Add(song);
         }
         OnPropertyChanged(nameof(Songs));
+    }
+
+    [RelayCommand]
+    public async Task PlaySong(SongModel song)
+    {
+        if (song == null) return; // Ensure the song exists
+
+        // Call the service to play the song using its SongId
+        await _homeSpeakerService.PlaySongAsync(song.SongId);
+    }
+
+    public SongViewModel(HomeSpeakerService homeSpeakerService)
+    {
+        _homeSpeakerService = homeSpeakerService;
     }
 }

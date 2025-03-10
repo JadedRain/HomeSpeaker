@@ -10,15 +10,7 @@
                 Text="Volume"
                 Command="{Binding GetVolumeCommand}">
             </Button>
-        <Button Text="Get Songs"
-                Command="{Binding GetSongsCommand}"/>
-        <CollectionView ItemsSource="{Binding Songs}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Label Text="{Binding Path}"/>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+
         <Button Text="Play First Song"
                 Command="{Binding PlayFirstSongCommand}"/>
         <Button Text="Pause"

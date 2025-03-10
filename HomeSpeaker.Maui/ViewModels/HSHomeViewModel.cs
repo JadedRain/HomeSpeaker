@@ -48,7 +48,7 @@ public partial class HSHomeViewModel : ObservableObject
 	[RelayCommand]
 	public async Task PlayFirstSong()
 	{
-		await _homeSpeakerService.PlaySongAsync(1);
+		await _homeSpeakerService.PlaySongAsync(0);
 	}
 
     [RelayCommand]

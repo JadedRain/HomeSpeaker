@@ -2,14 +2,35 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HomeSpeaker.Maui.Views.SongsView"
+             xmlns:local="clr-namespace:HomeSpeaker.Maui.ViewModels"
              Title="SongsView">
-    <VerticalStackLayout>
-        <Label
-        Text="Songs"
-        FontSize="32"
-        HorizontalOptions="Center"
-        VerticalOptions="Start"
-        Padding="10"/>
 
+    <VerticalStackLayout Padding="20">
+        <Button Text="Get Songs"
+                Command="{Binding GetSongsCommand}"
+                HorizontalOptions="FillAndExpand"
+                Padding="15" BackgroundColor="#2196F3" TextColor="White" CornerRadius="10" FontSize="18"/>
+        <CollectionView ItemsSource="{Binding Songs}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal" Padding="10" Margin="5">
+                        <Label Text="{Binding Name}" 
+                               FontSize="16" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="StartAndExpand" 
+                               TextColor="Black" />
+                        <Button Text="Play"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:SongViewModel}}, Path=PlaySongCommand}"
+                                CommandParameter="{Binding .}"
+                                Padding="10" 
+                                BackgroundColor="#FF5722" 
+                                TextColor="White" 
+                                CornerRadius="10" 
+                                FontSize="14" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
+
 </ContentPage>
