@@ -29,6 +29,19 @@ public class SongModel
 	public string? Folder { get; private set; }
 }
 
+public partial class SongGroup : List<SongModel>
+{
+    public string FolderName { get; set; }
+    public string FolderPath { get; set; }
+
+    public SongGroup(string name, List<SongModel> songs) : base(songs)
+    {
+        var parts = name.Split('/', '\\');
+        FolderName = parts.Last();
+        FolderPath = name;
+    }
+}
+
 
 public static class ViewModelExtensions
 {

@@ -21,6 +21,11 @@
         </CollectionView>
         <Button Text="Play First Song"
                 Command="{Binding PlayFirstSongCommand}"/>
-
+        <Button Text="Pause"
+                Command="{Binding PauseSongCommand}"/>
+        <Button Text="Resume"
+                Command="{Binding ResumeSongCommand}"/>
+        <Button Text="Folder"
+                Command="{Binding PlaySongFolderCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

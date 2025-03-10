@@ -27,6 +27,8 @@ public static class MauiProgram
 		builder.Services.AddSingleton<HomeSpeakerService>();
 		builder.Services.AddSingleton<HSHomeViewModel>();
 		builder.Services.AddSingleton<HSHomeView>();
+		builder.Services.AddSingleton<SongViewModel>();
+		builder.Services.AddSingleton<SongsView>();
 
         return builder.Build();
 	}

@@ -12,4 +12,9 @@
         ContentTemplate="{DataTemplate local:HSHomeView}"
         Route="MainPage" />
 
+    <ShellContent
+        Title="Songs"
+        ContentTemplate="{DataTemplate local:SongsView}"
+        Route="SongsView" />
+
 </Shell>

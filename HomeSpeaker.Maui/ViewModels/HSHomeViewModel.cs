@@ -24,7 +24,16 @@ public partial class HSHomeViewModel : ObservableObject
 		Volume = await _homeSpeakerService.GetVolumeAsync();
 	}
 
-	[RelayCommand]
+    [RelayCommand]
+    public async Task UpdateVolume(int newVolume)
+    {
+        
+            Volume = newVolume;
+            await _homeSpeakerService.SetVolumeAsync(newVolume);
+    }
+
+
+    [RelayCommand]
 	public async void GetSongs()
 	{
 		Songs.Clear();
@@ -37,12 +46,50 @@ public partial class HSHomeViewModel : ObservableObject
 	}
 
 	[RelayCommand]
-	public async void PlayFirstSong()
+	public async Task PlayFirstSong()
 	{
 		await _homeSpeakerService.PlaySongAsync(1);
 	}
 
-	public HSHomeViewModel(HomeSpeakerService homeSpeakerService)
+    [RelayCommand]
+    public async Task PlaySongFolder()
+    {
+        // Ensure that there are songs in the collection before attempting to play
+        if (Songs.Any())
+        {
+            // Get the folder path from the first song (or use any logic to get the folder path)
+            var firstSongFolderPath = Songs.FirstOrDefault()?.Folder;
+
+            // If a folder path is found, play the folder
+            if (!string.IsNullOrEmpty(firstSongFolderPath))
+            {
+                await _homeSpeakerService.PlayFolderAsync(firstSongFolderPath);
+            }
+        }
+      
+    }
+
+    [RelayCommand]
+	public async Task PauseSong()
+	{
+		await _homeSpeakerService.StopPlayingAsync();
+	}
+
+	[RelayCommand]
+	public async Task ResumeSong()
+	{
+        await _homeSpeakerService.ResumePlayAsync();
+    }
+    [RelayCommand]
+    public async Task ClearQueue()
+    {
+       
+            await _homeSpeakerService.ClearQueueAsync();
+            Songs.Clear();  
+    }
+
+
+    public HSHomeViewModel(HomeSpeakerService homeSpeakerService)
 	{
 		_homeSpeakerService = homeSpeakerService;
 	}
