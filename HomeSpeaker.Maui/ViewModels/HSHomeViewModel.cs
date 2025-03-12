@@ -16,6 +16,15 @@ public partial class HSHomeViewModel : ObservableObject
 	private int volume = 1;
 
 	[ObservableProperty]
+	private SongModel currentSong;
+
+	[ObservableProperty]
+	private string currentClientAddress;
+
+	[ObservableProperty]
+	private string updatedClientAddress;
+
+	[ObservableProperty]
 	private ObservableCollection<SongModel> songs = new();
 
 
@@ -50,8 +59,19 @@ public partial class HSHomeViewModel : ObservableObject
 	}
 
 	[RelayCommand]
+	public async void SetCurrentClientAddress()
+	{
+		await _homeSpeakerService.UpdateClient(UpdatedClientAddress);
+		CurrentClientAddress = UpdatedClientAddress;
+	}
+
+	
+
+
+	[RelayCommand]
 	public async Task PlayFirstSong()
 	{
+		await SetCurrentSong(0);
 		await _homeSpeakerService.PlaySongAsync(0);
 	}
 
@@ -77,6 +97,7 @@ public partial class HSHomeViewModel : ObservableObject
 	public async Task PauseSong()
 	{
 		await _homeSpeakerService.StopPlayingAsync();
+		await SetCurrentSong(-1);
 	}
 
 	[RelayCommand]
@@ -87,7 +108,6 @@ public partial class HSHomeViewModel : ObservableObject
     [RelayCommand]
     public async Task ClearQueue()
     {
-       
             await _homeSpeakerService.ClearQueueAsync();
             Songs.Clear();  
     }
@@ -97,6 +117,18 @@ public partial class HSHomeViewModel : ObservableObject
 	{
 		_homeSpeakerService = homeSpeakerService;
         GetVolume();
+		GetSongs();
+		CurrentClientAddress = _homeSpeakerService.defaultAddress;
+	}
+
+	private async Task SetCurrentSong(int songId)
+	{
+		if (songId == -1)
+		{
+			CurrentSong = null;
+			return;
+		}
+		CurrentSong = Songs.Where(song => song.SongId == songId).FirstOrDefault();
 	}
 }
 

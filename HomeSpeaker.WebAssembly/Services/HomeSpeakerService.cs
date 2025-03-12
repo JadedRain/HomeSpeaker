@@ -21,8 +21,8 @@ public class HomeSpeakerService
         {
             HttpHandler = new GrpcWebHandler(new HttpClientHandler())
         });
-
         client = new HomeSpeakerClient(channel);
+        
         this.logger = logger;
         _ = listenForEvents();
     }
@@ -192,6 +192,7 @@ public class HomeSpeakerService
         await client.PlayerControlAsync(new PlayerControlRequest { Stop = true, ClearQueue = true });
         await client.EnqueueSongAsync(new PlaySongRequest { SongId = songId });
     }
+
 
     public async Task<IEnumerable<SongViewModel>> GetPlayQueueAsync()
     {

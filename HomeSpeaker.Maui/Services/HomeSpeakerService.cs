@@ -15,21 +15,22 @@ public class HomeSpeakerService : HomeSpeakerBase
 	private HomeSpeakerClient _client;
 	private List<SongMessage> songs = new();
     public event EventHandler QueueChanged;
+    public string defaultAddress = "https://localhost:7238";
 
 
-    public IEnumerable<SongMessage> Songs => songs;
-	public HomeSpeakerService(ILogger<HomeSpeakerService> logger)
-	{
-		_logger = logger;
-		var address = "https://localhost:7238";
-		var channel = GrpcChannel.ForAddress(address);
 
-		_client = new HomeSpeakerClient(channel);
+	public IEnumerable<SongMessage> Songs => songs;
+    public HomeSpeakerService(ILogger<HomeSpeakerService> logger)
+    {
+        _logger = logger;
+        var channel = GrpcChannel.ForAddress(defaultAddress);
+
+        _client = new HomeSpeakerClient(channel);
         _ = listenForEvents();
 
     }
 
-    private async Task listenForEvents()
+	private async Task listenForEvents()
     {
         var eventReply = _client.SendEvent(new Google.Protobuf.WellKnownTypes.Empty());
         await foreach (var eventInstance in eventReply.ResponseStream.ReadAllAsync())
@@ -44,6 +45,12 @@ public class HomeSpeakerService : HomeSpeakerBase
 		var status = await GetStatusAsync();
 		_logger.LogInformation("Got status");
 		return status.Volume;
+	}
+
+    public async Task UpdateClient(string address)
+    {
+        var channel = GrpcChannel.ForAddress(address);
+        _client = new HomeSpeakerClient(channel);
 	}
 
     public async Task UpdateQueueAsync(List<SongModel> songs)
