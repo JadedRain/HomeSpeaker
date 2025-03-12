@@ -3,61 +3,64 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HomeSpeaker.Maui.Views.HSHomeView"
              Title="HSHomeView">
-    <VerticalStackLayout>
-        <Label 
-            Text="{Binding Volume}"
-            FontSize="20"
-            TextColor="Black"
-            HorizontalOptions="Center" />
-        <Button
-            Text="Volume"
-            Command="{Binding GetVolumeCommand}"
-            Padding="10" 
-            BackgroundColor="#2196F3"
-            TextColor="White" 
-            CornerRadius="10" 
-            FontSize="14" />
-        <Frame BorderColor="Black"
-            CornerRadius="5"
-               HasShadow="True"
-               Padding="5"
-               Margin="0,10">
-            <Entry Text="{Binding Volume}" 
-                   Keyboard="Numeric"
-                   Placeholder="Enter Volume (0-100)"
-                   MaxLength="3"
-                   TextColor="Black"
-                   FontSize="16"
-                   HorizontalOptions="FillAndExpand"
-                   VerticalOptions="Center" />
-        </Frame>
+
+    <Grid ColumnDefinitions="*,auto,auto,auto,*"
+              ColumnSpacing="10"
+              RowDefinitions="auto,*,auto,auto"
+              RowSpacing="10">
+
+
         <Button Text="Play First Song"
-                 Command="{Binding PlayFirstSongCommand}"
-                  Padding="10" 
-                  BackgroundColor="#2196F3"
-                  TextColor="White" 
-                  CornerRadius="10" 
-                  FontSize="14" />
+                Command="{Binding PlayFirstSongCommand}"
+                BackgroundColor="#2196F3"
+                TextColor="White" 
+                CornerRadius="10" 
+                FontSize="14" 
+                Grid.Column="1"
+                Grid.Row="2"/>
         <Button Text="Pause"
-                  Command="{Binding PauseSongCommand}"
-                  Padding="10" 
-                  BackgroundColor="#2196F3"
-                  TextColor="White" 
-                  CornerRadius="10" 
-                  FontSize="14" />
+                Command="{Binding PauseSongCommand}"
+                BackgroundColor="#2196F3"
+                TextColor="White" 
+                CornerRadius="10" 
+                FontSize="14" 
+                Grid.Column="2"
+                Grid.Row="2"/>
+        
         <Button Text="Resume"
-                  Command="{Binding ResumeSongCommand}"
-                  Padding="10" 
-                  BackgroundColor="#2196F3"
-                  TextColor="White" 
-                  CornerRadius="10" 
-                  FontSize="14" />
+                Command="{Binding ResumeSongCommand}"
+                BackgroundColor="#2196F3"
+                TextColor="White" 
+                CornerRadius="10" 
+                FontSize="14" 
+                Grid.Column="3"
+                Grid.Row="2"/>
+        
         <Button Text="Play All"
-                  Command="{Binding PlaySongFolderCommand}"
-                  Padding="10" 
-                  BackgroundColor="#2196F3"
-                  TextColor="White" 
-                  CornerRadius="10" 
-                  FontSize="14" />
-    </VerticalStackLayout>
+                Command="{Binding PlaySongFolderCommand}"
+                BackgroundColor="#2196F3"
+                TextColor="White" 
+                CornerRadius="10" 
+                FontSize="14"
+                Grid.ColumnSpan="5"
+                Grid.Row="3"/>
+
+        <Grid Grid.Row="2"
+              Grid.Column="4"
+              ColumnDefinitions="*,auto,*"
+              ColumnSpacing="10">
+            
+            <Slider Maximum="100"
+                    Value="{Binding Volume}"
+                    Grid.Column="0"
+                    VerticalOptions="Center"/>
+
+            <Label  Text="{Binding Volume}"
+                    FontSize="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Grid.Column="1"/>
+        </Grid>
+    </Grid>
+
 </ContentPage>

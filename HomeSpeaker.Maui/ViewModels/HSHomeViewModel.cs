@@ -18,6 +18,7 @@ public partial class HSHomeViewModel : ObservableObject
 	[ObservableProperty]
 	private ObservableCollection<SongModel> songs = new();
 
+
 	[RelayCommand]
 	public async void GetVolume()
 	{
@@ -26,21 +27,17 @@ public partial class HSHomeViewModel : ObservableObject
 
     [RelayCommand]
     public async Task UpdateVolume(int newVolume)
-    {
-        
+    {   
             Volume = newVolume;
             await _homeSpeakerService.SetVolumeAsync(newVolume);
     }
 
-    [RelayCommand]
-    public async Task SetVolume(int newVolume)
-    {
-        Volume = newVolume;
-        await _homeSpeakerService.SetVolumeAsync(newVolume);
-    }
+	partial void OnVolumeChanged(int oldValue, int newValue)
+	{
+		UpdateVolume(newValue);
+	}
 
-
-    [RelayCommand]
+	[RelayCommand]
 	public async void GetSongs()
 	{
 		Songs.Clear();
@@ -99,6 +96,7 @@ public partial class HSHomeViewModel : ObservableObject
     public HSHomeViewModel(HomeSpeakerService homeSpeakerService)
 	{
 		_homeSpeakerService = homeSpeakerService;
+        GetVolume();
 	}
 }
 
