@@ -49,6 +49,7 @@ public class HomeSpeakerService : HomeSpeakerBase
 
     public async Task UpdateClient(string address)
     {
+        if (string.IsNullOrWhiteSpace(address)) return;
         var channel = GrpcChannel.ForAddress(address);
         _client = new HomeSpeakerClient(channel);
 	}

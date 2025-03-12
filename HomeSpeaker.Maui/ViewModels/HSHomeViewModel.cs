@@ -18,11 +18,7 @@ public partial class HSHomeViewModel : ObservableObject
 	[ObservableProperty]
 	private SongModel currentSong;
 
-	[ObservableProperty]
-	private string currentClientAddress;
 
-	[ObservableProperty]
-	private string updatedClientAddress;
 
 	[ObservableProperty]
 	private ObservableCollection<SongModel> songs = new();
@@ -58,12 +54,6 @@ public partial class HSHomeViewModel : ObservableObject
 		OnPropertyChanged(nameof(Songs));
 	}
 
-	[RelayCommand]
-	public async void SetCurrentClientAddress()
-	{
-		await _homeSpeakerService.UpdateClient(UpdatedClientAddress);
-		CurrentClientAddress = UpdatedClientAddress;
-	}
 
 	
 
@@ -118,7 +108,6 @@ public partial class HSHomeViewModel : ObservableObject
 		_homeSpeakerService = homeSpeakerService;
         GetVolume();
 		GetSongs();
-		CurrentClientAddress = _homeSpeakerService.defaultAddress;
 	}
 
 	private async Task SetCurrentSong(int songId)

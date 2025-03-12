@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HomeSpeaker.Maui.Views.ClientManagementView"
+             Title="Client Management">
+    <Grid ColumnDefinitions="auto,*,*"
+          ColumnSpacing="10"
+          RowDefinitions="auto,*">
+        <Label Text="{Binding CurrentClientAddress}"
+               Grid.Column="0"/>
+        <Entry Text="{Binding UpdatedClientAddress}"
+               Grid.Column="1"/>
+        <Button Text="Set Client"
+                Command="{Binding SetCurrentClientAddressCommand}"
+                Grid.Column="2"/>
+    </Grid>
+</ContentPage>

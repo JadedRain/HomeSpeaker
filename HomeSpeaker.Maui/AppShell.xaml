@@ -17,4 +17,9 @@
         ContentTemplate="{DataTemplate local:SongsView}"
         Route="SongsView" />
 
+    <ShellContent
+        Title="Client Management"
+        ContentTemplate="{DataTemplate local:ClientManagementView}"
+        Route="ClientManagement" />
+
 </Shell>
