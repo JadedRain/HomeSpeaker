@@ -18,6 +18,11 @@
         Route="SongsView" />
 
     <ShellContent
+        Title="Youtube"
+        ContentTemplate="{DataTemplate local:YoutubeView}"
+        Route="YoutubeView" />
+
+    <ShellContent
         Title="Client Management"
         ContentTemplate="{DataTemplate local:ClientManagementView}"
         Route="ClientManagement" />

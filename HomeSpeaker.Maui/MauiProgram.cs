@@ -31,6 +31,9 @@ public static class MauiProgram
 		builder.Services.AddSingleton<SongsView>();
 		builder.Services.AddSingleton<ClientManagementViewModel>();
 		builder.Services.AddSingleton<ClientManagementView>();
+        builder.Services.AddSingleton<MauiYoutubeService>();
+		builder.Services.AddSingleton<YoutubeViewModel>();
+		builder.Services.AddSingleton<YoutubeView>();
 
         return builder.Build();
 	}
