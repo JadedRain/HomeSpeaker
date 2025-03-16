@@ -36,7 +36,6 @@ public partial class SongViewModel : ObservableObject
         await _homeSpeakerService.PlaySongAsync(song.SongId);
     }
 
-
     [RelayCommand]
     public async Task PauseSong()
     {

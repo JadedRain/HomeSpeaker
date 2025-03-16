@@ -19,7 +19,6 @@ public partial class HSHomeViewModel : ObservableObject
 	private SongModel currentSong;
 
 
-
 	[ObservableProperty]
 	private ObservableCollection<SongModel> songs = new();
 

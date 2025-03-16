@@ -45,6 +45,15 @@
                 FontSize="14"
                 Grid.ColumnSpan="5"
                 Grid.Row="3"/>
+        <Button 
+    Text="Go to YouTube" 
+    Command="{Binding NavigateToYoutubeCommand}" 
+                  BackgroundColor="#2196F3"
+      TextColor="White" 
+      CornerRadius="10" 
+      FontSize="14"
+      Grid.ColumnSpan="5"
+      Grid.Row="4"/>
 
         <Grid Grid.Row="2"
               Grid.Column="4"
