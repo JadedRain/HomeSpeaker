@@ -50,7 +50,6 @@ public partial class YoutubeViewModel : ObservableObject
         {
             try
             {
-                // Calling the CacheVideoAsync method to download the video
                 await _mauiYoutubeService.CacheVideoAsync(video.Id, video.Title, new Progress<double>(progress =>
                 {
                     System.Diagnostics.Debug.WriteLine($"Download progress: {progress}%");
