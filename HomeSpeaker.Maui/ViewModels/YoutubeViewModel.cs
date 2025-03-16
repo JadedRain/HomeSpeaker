@@ -17,8 +17,9 @@ namespace HomeSpeaker.Maui.ViewModels;
 
 public partial class YoutubeViewModel : ObservableObject
 {
-    private readonly MauiYoutubeService _mauiYoutubeService;
     private HomeSpeakerService _hss;
+    private MauiYoutubeService _mauiYoutubeService;
+
     bool isSearching = false;
 
     [ObservableProperty]
@@ -27,11 +28,10 @@ public partial class YoutubeViewModel : ObservableObject
     [ObservableProperty]
     private string searchTerm = "";
 
-    public YoutubeViewModel(HomeSpeakerService svc)
+    public YoutubeViewModel(HomeSpeakerService hss)
     {
-        this._hss = svc;
+        this._hss = hss;
     }
-
 
     [RelayCommand]
     public async Task SearchYoutube()
@@ -46,25 +46,23 @@ public partial class YoutubeViewModel : ObservableObject
     [RelayCommand]
     public async Task DownloadVideo(Video video)
     {
-        if (video == null)
+        if (video != null)
         {
-            return;
-        }
+            try
+            {
+                // Calling the CacheVideoAsync method to download the video
+                await _mauiYoutubeService.CacheVideoAsync(video.Id, video.Title, new Progress<double>(progress =>
+                {
+                    System.Diagnostics.Debug.WriteLine($"Download progress: {progress}%");
+                }));
 
-        var progress = new Progress<double>(percentage =>
-        {
-            // You can update the UI here with the download progress percentage
-            Console.WriteLine($"Download Progress: {percentage}%");
-        });
-
-        try
-        {
-            await _mauiYoutubeService.CacheVideoAsync(video.Id, video.Title, progress);
-        }
-        catch (Exception ex)
-        {
-            return;
+                System.Diagnostics.Debug.WriteLine($"Download of {video.Title} completed.");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error during download: {ex.Message}");
+            }
         }
     }
-
 }
+
