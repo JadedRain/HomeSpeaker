@@ -9,7 +9,7 @@
         <Button Text="Get Songs"
                 Command="{Binding GetSongsCommand}"
                 HorizontalOptions="FillAndExpand"
-                Padding="15" BackgroundColor="#2196F3" TextColor="White" CornerRadius="10" FontSize="18"/>
+                Padding="15" CornerRadius="10" FontSize="18"/>
         <CollectionView ItemsSource="{Binding Songs}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -17,24 +17,17 @@
                         <Label Text="{Binding Name}" 
                                FontSize="16" 
                                VerticalOptions="Center" 
-                               HorizontalOptions="StartAndExpand" 
-                               TextColor="Black" />
+                               HorizontalOptions="StartAndExpand" />
                         <Button Text="Play"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:SongViewModel}}, Path=PlaySongCommand}"
                                 CommandParameter="{Binding .}"
                                 Padding="10" 
-                                BackgroundColor="#FF5722" 
-                                TextColor="White" 
-                                CornerRadius="10" 
-                                FontSize="14" />
+                                CornerRadius="10" />
                         <Button Text="Pause"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:SongViewModel}}, Path=PauseSongCommand}"
                                 CommandParameter="{Binding .}"
                                 Padding="10" 
-                                BackgroundColor="#FF5722" 
-                                TextColor="White" 
-                                CornerRadius="10" 
-                                FontSize="14" />
+                                CornerRadius="10" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

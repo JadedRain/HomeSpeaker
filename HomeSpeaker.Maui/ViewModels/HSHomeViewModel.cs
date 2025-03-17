@@ -54,14 +54,12 @@ public partial class HSHomeViewModel : ObservableObject
 	}
 
 
-	
-
-
 	[RelayCommand]
-	public async Task PlayFirstSong()
+	public async Task PlaySong(SongModel song)
 	{
-		await SetCurrentSong(0);
-		await _homeSpeakerService.PlaySongAsync(0);
+		if (song == null) return;
+		await SetCurrentSong(song.SongId);
+		await _homeSpeakerService.PlaySongAsync(song.SongId);
 	}
 
     [RelayCommand]
@@ -111,7 +109,7 @@ public partial class HSHomeViewModel : ObservableObject
 
 	private async Task SetCurrentSong(int songId)
 	{
-		if (songId == -1)
+		if (songId == -1 || songId == null)
 		{
 			CurrentSong = null;
 			return;

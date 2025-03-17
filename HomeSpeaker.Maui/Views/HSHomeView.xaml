@@ -2,75 +2,100 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HomeSpeaker.Maui.Views.HSHomeView"
+             xmlns:local="clr-namespace:HomeSpeaker.Maui.ViewModels"
              Title="HS Home">
 
-    <Grid ColumnDefinitions="*,auto,auto,auto,*"
-              ColumnSpacing="10"
-              RowDefinitions="auto,*,auto,auto"
-              RowSpacing="10">
+    <Grid ColumnDefinitions="*,*,*,*,*"
+            ColumnSpacing="10"
+            RowDefinitions="auto,auto,*,.12*,auto">
+        <!-- Make Grid here for song info-->
+        <Grid Grid.Row="1"
+              Grid.ColumnSpan="5"
+              RowDefinitions=".9*,*"
+              BackgroundColor="#4B775A">
+            <Label Text="{Binding CurrentSong.Name, StringFormat='Song: {0}'}"
+                   FontSize="Title"
+                   Grid.Row="0"
+                   VerticalOptions="Start"/>
+            <Label Text="{Binding CurrentSong.Artist, StringFormat='Artist: {0}'}"
+                   Grid.Row="1"/>    
+        </Grid>
 
-        <Label Text="{Binding CurrentSong.Name}"/>
+        <Border Stroke="#202622" StrokeThickness="2"
+                Grid.Row="2"
+                Grid.ColumnSpan="5">
+            <ScrollView Grid.Row="2"
+                        Grid.ColumnSpan="5">
+                <CollectionView ItemsSource="{Binding Songs}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                                <StackLayout Orientation="Horizontal" Padding="10" Margin="5"> 
+                                    <Label Text="{Binding Name}"
+                                           Grid.Column="0"
+                                           FontSize="16" 
+                                           VerticalOptions="Center" 
+                                           HorizontalOptions="StartAndExpand"/>
+                                    <Button Text="Play"
+                                            Grid.Column="2"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Center"
+                                            Margin="5"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:HSHomeViewModel}}, Path=PlaySongCommand}"
+                                            CommandParameter="{Binding .}"
+                                            CornerRadius="10" />
 
-        <Button Text="Play First Song"
-                Command="{Binding PlayFirstSongCommand}"
-                BackgroundColor="#2196F3"
-                TextColor="White" 
-                CornerRadius="10" 
-                FontSize="14" 
-                Grid.Column="1"
-                Grid.Row="2"/>
-        <Button Text="Pause"
-                Command="{Binding PauseSongCommand}"
-                BackgroundColor="#2196F3"
-                TextColor="White" 
-                CornerRadius="10" 
-                FontSize="14" 
-                Grid.Column="2"
-                Grid.Row="2"/>
+                                </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Border>
         
-        <Button Text="Resume"
-                Command="{Binding ResumeSongCommand}"
-                BackgroundColor="#2196F3"
-                TextColor="White" 
-                CornerRadius="10" 
-                FontSize="14" 
-                Grid.Column="3"
-                Grid.Row="2"/>
-        
-        <Button Text="Play All"
-                Command="{Binding PlaySongFolderCommand}"
-                BackgroundColor="#2196F3"
-                TextColor="White" 
-                CornerRadius="10" 
-                FontSize="14"
-                Grid.ColumnSpan="5"
-                Grid.Row="3"/>
-        <Button 
-    Text="Go to YouTube" 
-    Command="{Binding NavigateToYoutubeCommand}" 
-                  BackgroundColor="#2196F3"
-      TextColor="White" 
-      CornerRadius="10" 
-      FontSize="14"
-      Grid.ColumnSpan="5"
-      Grid.Row="4"/>
-
-        <Grid Grid.Row="2"
-              Grid.Column="4"
-              ColumnDefinitions="*,auto,*"
-              ColumnSpacing="10">
+        <Grid Grid.Column="0"
+              Grid.Row="3"
+              Grid.ColumnSpan="5"
+              RowDefinitions="*"
+              ColumnDefinitions="*,auto,auto,*"
+              ColumnSpacing="15"
+              BackgroundColor="#1A1C1B">
+              
+            <Button Text="Play All"
+                    Command="{Binding PlaySongFolderCommand}"
+                    CornerRadius="10" 
+                    Grid.Column="1"
+                    HeightRequest="10"/>
             
-            <Slider Maximum="100"
+            <Button Text="Stop"
+                    Command="{Binding PauseSongCommand}"
+                    CornerRadius="10" 
+                    Grid.Column="2"
+                    HeightRequest="10"/>
+        
+
+            <Grid Grid.Column="4"
+                  ColumnDefinitions="*,auto,*"
+                  ColumnSpacing="11">
+
+                <Slider Maximum="100"
                     Value="{Binding Volume}"
                     Grid.Column="0"
                     VerticalOptions="Center"/>
 
-            <Label  Text="{Binding Volume}"
+                <Label Text="{Binding Volume}"
                     FontSize="20"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Grid.Column="1"/>
+            </Grid>
         </Grid>
+        
+        <Button Text="Go to YouTube" 
+            Command="{Binding NavigateToYoutubeCommand}" 
+              CornerRadius="10" 
+              Grid.ColumnSpan="5"
+              Grid.Row="4"/>
+
+
     </Grid>
 
 </ContentPage>
