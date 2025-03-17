@@ -1,7 +1,7 @@
 ﻿using HomeSpeaker.Shared;
 using System.Collections.Generic;
 
-namespace HomeSpeaker.Server2;
+namespace HomeSpeaker.Shared;
 
 public interface IDataStoreMaui
 {

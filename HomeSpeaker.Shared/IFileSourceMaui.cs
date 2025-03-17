@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace HomeSpeaker.Server
+namespace HomeSpeaker.Shared
 {
     public interface IFileSourceMaui
     {

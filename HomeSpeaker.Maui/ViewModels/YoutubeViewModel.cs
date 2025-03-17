@@ -28,9 +28,10 @@ public partial class YoutubeViewModel : ObservableObject
     [ObservableProperty]
     private string searchTerm = "";
 
-    public YoutubeViewModel(HomeSpeakerService hss)
+    public YoutubeViewModel(HomeSpeakerService hss, MauiYoutubeService mys)
     {
-        this._hss = hss;
+        _hss = hss;
+        _mauiYoutubeService = mys;
     }
 
     [RelayCommand]
@@ -46,6 +47,8 @@ public partial class YoutubeViewModel : ObservableObject
     [RelayCommand]
     public async Task DownloadVideo(Video video)
     {
+        // The current issue that happens is files save to bin/Debug/...
+        // Don't know how this saves for you but this is a reminder to myself about what is happening. Will solve. (Probably)
         if (video != null)
         {
             try

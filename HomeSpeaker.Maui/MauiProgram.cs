@@ -2,7 +2,10 @@
 using HomeSpeaker.Maui.Services;
 using HomeSpeaker.Maui.ViewModels;
 using HomeSpeaker.Maui.Views;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using HomeSpeaker.Shared;
 
 namespace HomeSpeaker.Maui;
 
@@ -31,6 +34,12 @@ public static class MauiProgram
 		builder.Services.AddSingleton<SongsView>();
 		builder.Services.AddSingleton<ClientManagementViewModel>();
 		builder.Services.AddSingleton<ClientManagementView>();
+		//builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+		builder.Services.AddSingleton<IDataStoreMaui, OnDiskDataStoreMaui>();
+		builder.Services.AddSingleton<IFileSourceMaui>(_ => new DefaultFileSource("HomeSpeakerMedia"));
+		builder.Services.AddSingleton<ITagParserMaui, DefaultTagParser>();
+
+		builder.Services.AddSingleton<Mp3LibraryMaui>();
         builder.Services.AddSingleton<MauiYoutubeService>();
 		builder.Services.AddSingleton<YoutubeViewModel>();
 		builder.Services.AddSingleton<YoutubeView>();
@@ -38,3 +47,5 @@ public static class MauiProgram
         return builder.Build();
 	}
 }
+// Temp:
+// builder.Configuration[ConfigKeysMaui.MediaFolder] ?? throw new MissingConfigExceptionMaui(ConfigKeysMaui.MediaFolder))

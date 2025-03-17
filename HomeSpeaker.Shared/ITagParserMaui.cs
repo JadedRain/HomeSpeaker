@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace HomeSpeaker.Server
+namespace HomeSpeaker.Shared
 {
     public interface ITagParserMaui
     {
