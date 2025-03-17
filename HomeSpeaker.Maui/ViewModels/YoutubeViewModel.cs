@@ -67,5 +67,25 @@ public partial class YoutubeViewModel : ObservableObject
             }
         }
     }
+    [RelayCommand]
+    private async Task NavigateToYoutube()
+    {
+        await Shell.Current.GoToAsync("///YoutubeView");
+    }
+    [RelayCommand]
+    private async Task NavigateToSongs()
+    {
+        await Shell.Current.GoToAsync("///SongsView");
+    }
+    [RelayCommand]
+    private async Task NavigateToClientManagment()
+    {
+        await Shell.Current.GoToAsync("///ClientManagementView");
+    }
+    [RelayCommand]
+    private async Task NavigateToHome()
+    {
+        await Shell.Current.GoToAsync("///HSHomeView");
+    }
 }
 

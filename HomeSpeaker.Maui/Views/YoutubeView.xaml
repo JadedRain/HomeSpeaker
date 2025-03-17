@@ -5,17 +5,16 @@
              xmlns:local="clr-namespace:HomeSpeaker.Maui.ViewModels"
              Title="YoutubeView">
     <ScrollView>
-        
-    <VerticalStackLayout Padding="20">
+        <VerticalStackLayout Padding="20">
             <Entry Placeholder="Search Youtube" Text="{Binding SearchTerm}" />
             <Button Text="Get Songs"
             Command="{Binding SearchYoutubeCommand}"
             HorizontalOptions="FillAndExpand"
             Padding="15" CornerRadius="10" FontSize="18"/>
-        <CollectionView ItemsSource="{Binding Videos}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Orientation="Horizontal" Padding="10" Margin="5">
+            <CollectionView ItemsSource="{Binding Videos}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Padding="10" Margin="5">
                             <Label Text="{Binding Title}" 
                            FontSize="16" 
                            VerticalOptions="Center" 
@@ -26,9 +25,21 @@
                            Padding="10" 
                            CornerRadius="10" />
                         </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <StackLayout Orientation="Horizontal"
+                         Spacing="10"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="EndAndExpand"
+                         Padding="0,20">
+                <Button Text="Go to Songs"
+                        Command="{Binding NavigateToSongsCommand}"
+                        CornerRadius="10"
+                        HorizontalOptions="FillAndExpand"
+                        Padding="15"
+                        FontSize="16"/>
+            </StackLayout>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

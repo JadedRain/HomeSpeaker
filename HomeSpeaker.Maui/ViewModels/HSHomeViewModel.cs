@@ -116,5 +116,25 @@ public partial class HSHomeViewModel : ObservableObject
 		}
 		CurrentSong = Songs.Where(song => song.SongId == songId).FirstOrDefault();
 	}
+    [RelayCommand]
+    private async Task NavigateToYoutube()
+    {
+        await Shell.Current.GoToAsync("///YoutubeView");
+    }
+    [RelayCommand]
+    private async Task NavigateToSongs()
+    {
+        await Shell.Current.GoToAsync("///SongsView");
+    }
+    [RelayCommand]
+    private async Task NavigateToClientManagment()
+    {
+        await Shell.Current.GoToAsync("///ClientManagementView");
+    }
+    [RelayCommand]
+    private async Task NavigateToHome()
+    {
+        await Shell.Current.GoToAsync("///HSHomeView");
+    }
 }
 
