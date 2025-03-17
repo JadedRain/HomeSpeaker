@@ -18,7 +18,25 @@
                    Grid.Row="0"
                    VerticalOptions="Start"/>
             <Label Text="{Binding CurrentSong.Artist, StringFormat='Artist: {0}'}"
-                   Grid.Row="1"/>    
+                   Grid.Row="1"/>
+            <StackLayout Grid.Row="2"
+                         Grid.ColumnSpan="5"
+                         Orientation="Horizontal" 
+                         Spacing="10"
+                         HorizontalOptions="Center">
+                <Button Text="Go to YouTube"
+                        Command="{Binding NavigateToYoutubeCommand}"
+                        CornerRadius="10"
+                        HorizontalOptions="FillAndExpand"/>
+                <Button Text="Go to Songs"
+                        Command="{Binding NavigateToSongsCommand}"
+                        CornerRadius="10"
+                        HorizontalOptions="FillAndExpand"/>
+                <Button Text="Go to Client"
+                        Command="{Binding NavigateToClientManagmentCommand}"
+                        CornerRadius="10"
+                        HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
         </Grid>
 
         <Border Stroke="#202622" StrokeThickness="2"
@@ -88,14 +106,6 @@
                     Grid.Column="1"/>
             </Grid>
         </Grid>
-        
-        <Button Text="Go to YouTube" 
-            Command="{Binding NavigateToYoutubeCommand}" 
-              CornerRadius="10" 
-              Grid.ColumnSpan="5"
-              Grid.Row="4"/>
-
-
     </Grid>
 
 </ContentPage>
